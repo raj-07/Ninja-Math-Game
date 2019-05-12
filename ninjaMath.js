@@ -156,12 +156,13 @@ function startCountdown(seconds){
       
       clearInterval(interval);
       displayMessage.textContent = "Game Over";
+      displayMessage.style.color = "Black";
         
         if(score.textContent <= 10){
             displayEquation.textContent = "You need practice.."
-        } else if(score.textContent <= 20){
+        } else if(score.textContent <= 21){
             displayEquation.textContent = "Not quite there yet.."
-        }else if(score.textContent <= 25){
+        }else if(score.textContent <= 27){
             displayEquation.textContent = "Nearly there!Dont give up"
         } else if(score.textContent >= 28){
             displayEquation.textContent = "You are a born Ninja!"
