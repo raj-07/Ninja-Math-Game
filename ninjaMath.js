@@ -4,14 +4,14 @@ var randomOperation;
 //0 = addition, 1 = substraction , 2 = multiplication, 3 = division
 var randomGrid;
 var setTimer = 30;
+var counter = 0;
+var questionCounter = 0;
 
 var btnStart = document.querySelector("#startBtn");
 var displayEquation = document.getElementById("displayEquation");
 var squares = document.querySelectorAll(".squares");
 var displayMessage = document.getElementById("displayMessage");
 var score = document.getElementById("score");
-var counter = 0;
-var questionCounter = 0;
 var qCounter = document.getElementById("qCounter");
 var btnRestart = document.querySelector("#resetBtn");
 var timer = document.getElementById("timer");
@@ -21,11 +21,6 @@ window.onload = function() {
         squares[i].style.pointerEvents = 'none';
     }
 };
-
-
-btnRestart.addEventListener("click", function() {
-    window.location.reload(false);
-})
 
 btnStart.addEventListener("click", function() {
     
@@ -48,41 +43,21 @@ for (var i = 0; i < squares.length; i++) {
     squares[i].style.color = "#fff";
 
     squares[i].addEventListener("click", function() {
-        if (this.innerText === (a + b).toString()) {
+       if (
+            (this.innerText === (a + b).toString()) || 
+            (this.innerText === (a - b).toString()) || 
+            (this.innerText === (a * b).toString()) || 
+            (this.innerText == (Number.parseFloat(a / b).toFixed(1)).toString())
+          ){
 
             displayMessage.textContent = "Correct!";
             counter++;
             score.textContent = counter;
-            console.log("Correct!" + randomGrid);
             randNum();
             generateRandomOperation();
-        } else if (this.innerText === (a - b).toString()) {
-
-            displayMessage.textContent = "Correct!";
-            counter++;
-            score.textContent = counter;
-            console.log("Correct!" + randomGrid);
-            randNum();
-            generateRandomOperation();
-        } else if (this.innerText === (a * b).toString()) {
-
-            displayMessage.textContent = "Correct!";
-            counter++;
-            score.textContent = counter;
-            console.log("Correct!" + randomGrid);
-            randNum();
-            generateRandomOperation();
-        } else if (this.innerText == (Number.parseFloat(a / b).toFixed(1)).toString()) {
-
-            displayMessage.textContent = "Correct!";
-            counter++;
-            score.textContent = counter;
-            console.log("Correct!" + randomGrid);
-            randNum();
-            generateRandomOperation();
+           
         } else {
             displayMessage.textContent = "Wrong!";
-            console.log("Wrong!");
             counter--;
             score.textContent = counter;
             randNum();
@@ -94,6 +69,10 @@ for (var i = 0; i < squares.length; i++) {
     })
 
 }
+
+btnRestart.addEventListener("click", function() {
+    window.location.reload(false);
+})
 
 function generateRandomOperation() {
     a = Math.floor(Math.random() * 11 + 2);
